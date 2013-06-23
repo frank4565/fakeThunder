@@ -120,7 +120,22 @@ class DeleteTask(tornado.web.RequestHandler):
         else:
             self.write("Fail")
 
+class ShareTask(tornado.web.RequestHandler):
+    def get(self, hash, task_id, email):
 
+        isLogin = check_login(hash)
+        if not isLogin:
+            self.write("Fail")
+            self.finish()
+            return
+
+        lixianAPI = lixianAPIs.get(hash)
+
+        result = lixianAPI.share(["zhzdhr"], [task_id])
+        if (result):
+            self.write("Success")
+        else:
+            self.write("Fail")
 
 
 class AddTaskHandler(tornado.web.RequestHandler):
@@ -239,6 +254,7 @@ application = tornado.web.Application([
 	(r'/([A-Za-z0-9]{32})/get_cookie',  GetCookieHandler),
 	(r'/vod_get_play_url', VodGetPlayUrl),
     (r'/DeleteTask/(.*)/(.*)', DeleteTask),
+    (r'/ShareTask/(.*)/(.*)/(.*)', ShareTask),
 	(r'(.*)', ZeroHandler),  #API Zero
 
 ])

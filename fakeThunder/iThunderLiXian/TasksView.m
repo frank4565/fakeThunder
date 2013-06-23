@@ -602,7 +602,7 @@
                 
                 NSLog(@"%@ %@", t.TaskID, self.hash);
                 
-                [NSThread detachNewThreadSelector:@selector(thread_delete_task:) toTarget:self withObject:t];
+                //[NSThread detachNewThreadSelector:@selector(thread_delete_task:) toTarget:self withObject:t];
                 break;
             }
         }
