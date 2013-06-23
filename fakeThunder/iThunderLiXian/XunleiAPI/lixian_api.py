@@ -622,7 +622,7 @@ class LiXianAPI(object):
         r.raise_for_status()
         #forward_res(1,"ok",649513164808429);
         function, args = parser_js_function_call(r.content)
-        print args
+        DEBUG(pformat(args))
         assert args
         if args and args[0] == 1:
             return True
